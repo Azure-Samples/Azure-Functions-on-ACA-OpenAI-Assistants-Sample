@@ -57,7 +57,7 @@ public class AssistantSkills
     )
     {
         string responseString = await client.GetStringAsync(
-            "https://tododaprfuncapp.livelypebble-0ece6897.westcentralus.azurecontainerapps.io/api/GetTodoManager"
+            "<replace with ACA url>/api/GetTodoManager"
         );
         List<TodoItem> todoItem = JsonConvert.DeserializeObject<List<TodoItem>>(responseString);
 
@@ -79,11 +79,11 @@ public class AssistantSkills
     {
         //Replace with your domain and modify the content, recipient details as required
         string connectionString =
-            "endpoint=https://antaiskills-acs.unitedstates.communication.azure.com/;accesskey=BxPJ5Rn+wfGlETYZMW2Gv0KdbpkyYavRnZaXQdtvkyfi+iijLrFUf4MZ+Nob84uskeb0mIKMSOjIvWBdqFJShQ==";
+            "<>";
         var emailClient = new EmailClient(connectionString);
 
         string responseString = await client.GetStringAsync(
-            "https://tododaprfuncapp.livelypebble-0ece6897.westcentralus.azurecontainerapps.io/api/GetTodoManager"
+            "<Replace ACA url>/api/GetTodoManager"
         );
         this.logger.LogInformation(
             "C# SendEmail HTTP trigger function processed a request.{0}",
@@ -106,8 +106,8 @@ public class AssistantSkills
 
         EmailSendOperation emailSendOperation = emailClient.Send(
             WaitUntil.Completed,
-            senderAddress: "DoNotReply@fb1972eb-0ed7-45a5-922d-1e4b5e0ad4a5.azurecomm.net",
-            recipientAddress: "ramya.oruganti@microsoft.com",
+            senderAddress: "<replace with communication service sender address>",
+            recipientAddress: "<replace with receipient address>",
             subject: "ToDo Task Created",
             htmlContent: $"<html><h1>Your Todo List </h1><p>{tasks.Replace("\n", "<br/>")}</p></html>",
             plainTextContent: tasks
