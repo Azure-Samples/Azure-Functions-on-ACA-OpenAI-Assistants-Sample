@@ -7,10 +7,10 @@ An end to end demo that demonstrates how to use the Azure Functions OpenAI Assis
 
 This project framework provides the following features:
 
-* OpenAI Extension for Azure Functions
-* Dapr Extension for Azure Functions
-* Azure Functions on Azure Container Apps hosting
-* Deploy using azd
+* [OpenAI Extension for Azure Functions](https://github.com/Azure/azure-functions-openai-extension)
+* [Dapr Extension for Azure Functions](https://github.com/Azure/azure-functions-dapr-extension)
+* [Azure Functions on Azure Container Apps hosting](https://github.com/Azure/azure-functions-on-container-apps)
+* [Deploy using azd](https://aka.ms/azure-dev/install)
 
 ## Getting Started
 
@@ -75,6 +75,72 @@ SWA_DEPLOYMENT_TOKEN=$(az staticwebapp secrets list --name $AZURE_STATICWEBSITE_
 ```sh
 
 cd ../backend
+```
+
+6\. Create the function app to host ToDoManager app in the same container app environment 
+```sh
+az functionapp create --resource-group <azd_created_ResourceGroup> --name <functionapp_name> \
+--environment <azd_created_MyContainerappEnvironment> \
+--storage-account <Storage_name> \
+--functions-version 4 \
+--runtime dotnet-isolated \
+--image <DOCKER_ID>/<ToDoManager_image_name>:<version>
+--workload-profile-name  <WORKLOAD_PROFILE_NAME> \
+ --cpu <vcpus> \
+ --memory <memory> \
+--enable-dapr true \
+--dapr-app-id <app-id-name> \
+--dapr-app-port <port_number> \
+--min-replicas 1
+```
+
+> The above function app creates below functions
+> ![image](https://github.com/Azure-Samples/Azure-Functions-on-ACA-OpenAI-Assistants-Sample/assets/45637559/034d31c3-a026-484e-87a6-901d5e0e9b94)
+> Note down the url of GetTodoManager for eg: https://tododaprfuncapp.xxxxxxxxxxxxxxx-xxxxxxxxxxx.westcentralus.azurecontainerapps.io/api/GetTodoManager?
+> Make sure to turn on Dapr for this function app Overview>Settings>Dapr(NEW)> click Enable > Provide App id and App Port as Dapr service invocation trigger is being used for AddToDoManager function
+![image](https://github.com/Azure-Samples/Azure-Functions-on-ACA-OpenAI-Assistants-Sample/assets/45637559/f097c1ee-0ea7-468a-82cd-cbf69c836a86)
+
+## Create Azure communication service
+
+7\. Add the GetToDoManager http url To AssistantSkills.cs within the GetTodos and SendEmail functions. Placeholders for this already provided for you in the code
+
+8\. Create Azure Email communication service using this (tutorial)[https://learn.microsoft.com/en-us/azure/communication-services/quickstarts/email/create-email-communication-resource?pivots=platform-azp] and add Azure Managed domain.
+![image](https://github.com/Azure-Samples/Azure-Functions-on-ACA-OpenAI-Assistants-Sample/assets/45637559/af6a4ad7-ecd0-4b65-ae1d-fc97c6d13736)
+
+After successful completion of above step you may try sending the email from Azure communication service
+![image](https://github.com/Azure-Samples/Azure-Functions-on-ACA-OpenAI-Assistants-Sample/assets/45637559/e53a6281-1863-470a-9ccc-c8b45cdb155c)
+
+9\. Update Communication service configs in AssistantSkills.cs within the SendEmail function placeholders have been created for you.
+![image](https://github.com/Azure-Samples/Azure-Functions-on-ACA-OpenAI-Assistants-Sample/assets/45637559/72edb7da-c039-478a-aa1f-8eeb51443361)
+
+## Update the dapr app id for ToDoManager Function
+Update the App id under the AddTodo placeholder has been created already
+
+![image](https://github.com/Azure-Samples/Azure-Functions-on-ACA-OpenAI-Assistants-Sample/assets/45637559/cf357f04-9585-4e28-b197-1ff674c8ed27)
+
+
+10\. Package the AssistantSkills function app into a containerized image
+
+``sh
+- cd ../backend
+- docker build --platform linux  --tag <docker id | acr id>/<image_name>:v1 .
+- docker push  <docker id | acr id>/<image_name>:v1
+```
+
+11\. Update the Function app created during azd deploy either by using portal or CLI
+
+```sh
+az functionapp config container set --name <azd-created-function-app-name> \
+--resource-group <azd-created-resource-group-name> \
+--image <docker id | acr id>/<image_name>:v1
+
+
+
+
+
+
+Add the above GetTodoManager 
+
 
  
 
