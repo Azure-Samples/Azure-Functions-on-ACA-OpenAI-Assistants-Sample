@@ -100,9 +100,10 @@ az functionapp create --resource-group <azd_created_ResourceGroup> --name <funct
 > Make sure to turn on Dapr for this function app Overview>Settings>Dapr(NEW)> click Enable > Provide App id and App Port as Dapr service invocation trigger is being used for AddToDoManager function
 ![image](https://github.com/Azure-Samples/Azure-Functions-on-ACA-OpenAI-Assistants-Sample/assets/45637559/f097c1ee-0ea7-468a-82cd-cbf69c836a86)
 
-## Create Azure communication service
+7\.  Add the GetToDoManager http url To AssistantSkills.cs within the GetTodos and SendEmail functions. Placeholders for this already provided for you in the code
+cd ../backend and find the AssistantSkills.cs code to update the above urls
 
-7\. Add the GetToDoManager http url To AssistantSkills.cs within the GetTodos and SendEmail functions. Placeholders for this already provided for you in the code
+## Create Azure communication service
 
 8\. Create Azure Email communication service using this (tutorial)[https://learn.microsoft.com/en-us/azure/communication-services/quickstarts/email/create-email-communication-resource?pivots=platform-azp] and add Azure Managed domain.
 ![image](https://github.com/Azure-Samples/Azure-Functions-on-ACA-OpenAI-Assistants-Sample/assets/45637559/af6a4ad7-ecd0-4b65-ae1d-fc97c6d13736)
@@ -121,53 +122,37 @@ Update the App id under the AddTodo placeholder has been created already
 
 10\. Package the AssistantSkills function app into a containerized image
 
-``sh
+```sh
 - cd ../backend
 - docker build --platform linux  --tag <docker id | acr id>/<image_name>:v1 .
 - docker push  <docker id | acr id>/<image_name>:v1
 ```
 
-11\. Update the Function app created during azd deploy either by using portal or CLI
+11\. Update the Function app created during azd deploy either by using portal or CLI with the backend function image and enable dapr
 
 ```sh
 az functionapp config container set --name <azd-created-function-app-name> \
 --resource-group <azd-created-resource-group-name> \
---image <docker id | acr id>/<image_name>:v1
+--image <docker id | acr id>/<image_name>:v1 \
+--dapr-enable true
+```
 
+12\. Linking from Static Webapps to Functions on Azure Container Apps is not supported so api.ts under /app/frontend/src/app.ts has to be updated function on azure container apps urls. 
+Redploy the statis webapps post updating api.ts
 
+```sh
+swa cli - Provide the prompted inputs
+SWA_DEPLOYMENT_TOKEN=$(az staticwebapp secrets list --name $AZURE_STATICWEBSITE_NAME --query "properties.apiKey" --output tsv)
 
+  swa deploy --env production --deployment-token $SWA_DEPLOYMENT_TOKEN
+```
 
-
-
-Add the above GetTodoManager 
-
-
- 
-
-### Quickstart
-(Add steps to get up and running quickly)
-
-1. git clone [repository clone url]
-2. cd [repository name]
-3. ...
-
-
+13\. Update CORs with static webapps url to allow the frontend app to communicate with functions
 ## Demo
 
-A demo app is included to show how to use the project.
+click on the static webapps service url to access the chat application
 
-To run the demo, follow these steps:
-
-(Add steps to start up the demo)
-
-1.
-2.
-3.
 
 ## Resources
 
-(Any additional resources or related projects)
-
-- Link to supporting information
-- Link to similar sample
-- ...
+(Functions OpenAI demo)[https://github.com/Azure-Samples/Azure-Functions-OpenAI-Demo/]
