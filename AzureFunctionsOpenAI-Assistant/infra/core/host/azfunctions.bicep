@@ -125,7 +125,7 @@ resource functionApp 'Microsoft.Web/sites@2023-01-01' = {
   properties: {
     managedEnvironmentId: env.id
     siteConfig: {
-      linuxFxVersion: '<add_your_backend_function_app_docker_image_here>'
+      linuxFxVersion: 'mcr.microsoft.com/azure-functions/dotnet8-quickstart-demo:1.0'
       cors: {
         allowedOrigins: union([ 'https://portal.azure.com', 'https://ms.portal.azure.com' ], allowedOrigins)
       }
