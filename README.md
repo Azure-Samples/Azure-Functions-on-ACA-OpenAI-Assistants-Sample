@@ -51,8 +51,10 @@ cd AzureFunctionsOpenAI-Assistant
 Run azd login
 Run az account set --subscription "<your target subscription>"
 Run azd init
-For the target location, the regions that currently support the models used in this sample are East US or South Central US. For an up-to-date list of regions and models, check [here](https://learn.microsoft.com/en-us/azure/cognitive-services/openai/concepts/models). Make sure that all the intended services for this deployment have availability in your targeted regions.
+
 ```
+For the target location, the regions that currently support the models used in this sample are East US or South Central US. For an up-to-date list of regions and models,
+check [here](https://learn.microsoft.com/en-us/azure/cognitive-services/openai/concepts/models).  Make sure that all the intended services for this deployment have availability in your targeted regions.
 
 3\. Execute the following command, if you don't have any pre-existing Azure services and want to start from a fresh deployment.
 
@@ -151,8 +153,25 @@ SWA_DEPLOYMENT_TOKEN=$(az staticwebapp secrets list --name $AZURE_STATICWEBSITE_
 ## Demo
 
 click on the static webapps service url to access the chat application
+> Go head and create tasks
+> For eg: create a task to book an appointment at 8 PM
+> create a task to collect reports before appointment
+> list tasks
+> send email 
 
 
 ## Resources
 
-(Functions OpenAI demo)[https://github.com/Azure-Samples/Azure-Functions-OpenAI-Demo/]
+[Functions OpenAI demo](https://github.com/Azure-Samples/Azure-Functions-OpenAI-Demo/)
+
+## Getting Started with Azure Functions on Azure Container Apps.
+Deploy your apps to Azure Functions for cloud-native microservices today!
+
+Refer to below resources to learn about current and new updates /enhancements to the service.
+
+Visit the [Getting Started](https://learn.microsoft.com/azure/azure-functions/functions-container-apps-hosting) guide on Microsoft Docs.
+Learn more about pricing details from the  [pricing page](https://aka.ms/containerapps/pricing).
+Reach us via our GitHub page - [Azure/azure-functions-on-container-apps repo.](https://github.com/Azure/azure-functions-on-container-apps)
+Check out the [samples](https://github.com/Azure/azure-functions-on-container-apps/tree/main/samples)
+Help us improve by taking this short [survey](https://microsoft.qualtrics.com/jfe/form/SV_byFGULLJlKPh9Xw)
+ 
