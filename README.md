@@ -168,13 +168,11 @@ click on the static webapps service url to access the chat application
 [Functions OpenAI demo](https://github.com/Azure-Samples/Azure-Functions-OpenAI-Demo/)
 
 ## Getting Started with Azure Functions on Azure Container Apps.
-Deploy your apps to Azure Functions for cloud-native microservices today!
-
-Refer to below resources to learn about current and new updates /enhancements to the service.
-
-Visit the [Getting Started](https://learn.microsoft.com/azure/azure-functions/functions-container-apps-hosting) guide on Microsoft Docs.
-Learn more about pricing details from the  [pricing page](https://aka.ms/containerapps/pricing).
-Reach us via our GitHub page - [Azure/azure-functions-on-container-apps repo.](https://github.com/Azure/azure-functions-on-container-apps)
-Check out the [samples](https://github.com/Azure/azure-functions-on-container-apps/tree/main/samples)
-Help us improve by taking this short [survey](https://microsoft.qualtrics.com/jfe/form/SV_byFGULLJlKPh9Xw)
+> Deploy your apps to Azure Functions for cloud-native microservices today!
+> Refer to below resources to learn about current and new updates /enhancements to the service.
+> Visit the [Getting Started](https://learn.microsoft.com/azure/azure-functions/functions-container-apps-hosting) guide on Microsoft Docs.
+> Learn more about pricing details from the  [pricing page](https://aka.ms/containerapps/pricing).
+> Reach us via our GitHub page - [Azure/azure-functions-on-container-apps repo.](https://github.com/Azure/azure-functions-on-container-apps)
+> Check out the [samples](https://github.com/Azure/azure-functions-on-container-apps/tree/main/samples)
+> Help us improve by taking this short [survey](https://microsoft.qualtrics.com/jfe/form/SV_byFGULLJlKPh9Xw)
  
