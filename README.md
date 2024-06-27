@@ -57,11 +57,11 @@ For the target location, the regions that currently support the models used in t
 3\. Execute the following command, if you don't have any pre-existing Azure services and want to start from a fresh deployment.
 
 Run azd up - This will provision Azure resources and deploy this sample to those resources
-After the application has been successfully deployed you will see a URL printed to the console. Click that URL to interact with the application in your browser.
-> NOTE: It may take a minute for the application to be fully deployed.
-> Make sure Static Web Apps  and Function Apps are deployed successfully else GoTo cd ./scripts/deploy.sh
 
-## Manual deploy of Static Web apps and Function apps post infra creation
+> NOTE: It may take a minute for the application to be fully deployed.
+>  GoTo cd ./scripts/deploy.sh to deploy the Static Web Apps  and Function Apps 
+
+## Deploy of Static Web apps and Function apps post infra creation
 
 4\. Deploy SWA front end code to the static webapps service instance created during azd up using swa cli
 ```sh
