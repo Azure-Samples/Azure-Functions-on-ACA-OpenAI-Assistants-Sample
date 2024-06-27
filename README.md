@@ -157,7 +157,10 @@ click on the static webapps service url to access the chat application
 > For eg: create a task to book an appointment at 8 PM
 > create a task to collect reports before appointment
 > list tasks
-> send email 
+> send email
+
+![image](https://github.com/Azure-Samples/Azure-Functions-on-ACA-OpenAI-Assistants-Sample/assets/45637559/9011c3dc-df2a-4909-a121-277d5ee67496)
+
 
 
 ## Resources
